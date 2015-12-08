@@ -4,9 +4,7 @@ package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
 require("./bot/utils")
 
-local f = assert(io.popen('/usr/bin/git describe --tags', 'r'))
-VERSION = assert(f:read('*a'))
-f:close()
+VERSION = '0.14.6'
 
 -- This function is called when tg receive a msg
 function on_msg_receive (msg)
@@ -44,10 +42,10 @@ end
 
 function msg_valid(msg)
   -- Don't process outgoing messages
---  if msg.out then
---    print('\27[36mNot valid: msg from us\27[39m')
---    return false
---  end
+  if msg.out then
+    print('\27[36mNot valid: msg from us\27[39m')
+    --return false
+  end
 
   -- Before bot was started
   if msg.date < now then
@@ -70,10 +68,10 @@ function msg_valid(msg)
     return false
   end
 
---  if msg.from.id == our_id then
---    print('\27[36mNot valid: Msg from our id\27[39m')
---    return false
---  end
+  if msg.from.id == our_id then
+    print('\27[36mNot valid: Msg from our id\27[39m')
+    --return false
+  end
 
   if msg.to.type == 'encr_chat' then
     print('\27[36mNot valid: Encrypted chat\27[39m')
@@ -133,9 +131,13 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
     -- Checks if plugin is disabled on this chat
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
       if disabled_plugin == plugin_name and disabled then
-        local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
-        print(warning)
-        send_msg(receiver, warning, ok_cb, false)
+        if plugins[disabled_plugin].hidden then
+            print('Plugin '..disabled_plugin..' is disabled on this chat')
+        else
+            local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
+            print(warning)
+            send_msg(receiver, warning, ok_cb, false)
+        end
         return true
       end
     end
@@ -205,16 +207,27 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-      "banhammer",
-      "channels",
-      "greeter",
+      "echo",
+      "get",
+      "google",
       "groupmanager",
       "help",
       "id",
-      "invite",
+      "images",
+      "img_google",
+      "location",
+      "media",
       "plugins",
-      "version"},
-    sudo_users = {140871556},
+      "channels",
+      "set",
+      "stats",
+      "time",
+      "version",
+      "weather",
+      "youtube",
+      "media_handler",
+      "moderation"},
+    sudo_users = {70459880},
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'}
   }
