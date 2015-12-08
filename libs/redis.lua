@@ -2,14 +2,10 @@ local Redis = require 'redis'
 local FakeRedis = require 'fakeredis'
 
 local params = {
-  host = os.getenv('REDIS_HOST') or '127.0.0.1',
-  port = tonumber(os.getenv('REDIS_PORT') or 6379)
+  host = '127.0.0.1',
+  port = 6379,
 }
 
-local database = os.getenv('REDIS_DB')
-local password = os.getenv('REDIS_PASSWORD')
-
--- Overwrite HGETALL
 Redis.commands.hgetall = Redis.command('hgetall', {
   response = function(reply, command, ...)
     local new_reply = { }
@@ -20,7 +16,6 @@ Redis.commands.hgetall = Redis.command('hgetall', {
 
 local redis = nil
 
--- Won't launch an error if fails
 local ok = pcall(function()
   redis = Redis.connect(params)
 end)
@@ -44,14 +39,6 @@ if not ok then
     return fake[b] or fake_func
   end })
 
-else
-  if password then
-    redis:auth(password)
-  end
-  if database then
-    redis:select(database)
-  end
 end
-
 
 return redis
