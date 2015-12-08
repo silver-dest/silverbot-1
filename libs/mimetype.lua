@@ -1,9 +1,7 @@
--- Thanks to https://github.com/catwell/lua-toolbox/blob/master/mime.types
 do 
 
 local mimetype = {}
 
--- TODO: Add more?
 local types = {
   ["text/html"] = "html",
   ["text/css"] = "css",
@@ -73,12 +71,10 @@ local types = {
   ["video/x-msvideo"] = "avi"
 }
 
--- Returns the common file extension from a content-type
 function mimetype.get_mime_extension(content_type)
   return types[content_type]
 end
 
--- Returns the mimetype and subtype
 function mimetype.get_content_type(extension)
   for k,v in pairs(types) do
     if v == extension then
@@ -87,11 +83,9 @@ function mimetype.get_content_type(extension)
   end
 end
 
--- Returns the mimetype without the subtype
 function mimetype.get_content_type_no_sub(extension)
   for k,v in pairs(types) do
     if v == extension then
-      -- Before /
       return k:match('([%w-]+)/')
     end
   end
