@@ -1,15 +1,11 @@
 do
 
 function run(msg, matches)
-  return 'ZAC Team Robot v1.3'.. [[ 
-  Website:
-  http://ZAC.shayan-soft.IR
-  Channel: @ZACteam
-  Sudo: @shayansoft
-  Powered by:
-  shayan soft Co. Group
-  http://shayan-soft.IR
-  Engineer Shayan Ahmadi]]
+  return 'SilVeR Robot v1.3'.. [[  
+  This is Old Bot OF Telegram.
+  This bot CreaTed By:
+  @MR_SILVER1[RePoRt]
+  This BoT Is A BesT BoT.]]
 end
 
 return {
