@@ -94,7 +94,7 @@ end
 
 local function telegram_help()
   local i = 0
-  local text = "ZAC Team Robot Tools List:\n\n"
+  local text = "SiLVeR Robot Tools List:\n\n"
   for name in pairsByKeys(plugins) do
     if plugins[name].hidden then
       name = nil
@@ -105,8 +105,8 @@ local function telegram_help()
   end
   text = text..'\n'..'Send !help <Name> or !help <Num> For See More Info'
   text = text..'\n'..'Send !helps For See More Info For All Tools'
-  text = text..'\n'..'Send !ver For See ZAC Robot Info'
-  text = text..'\n'..'Channel: @ZACteam - Sudo: @shayansoft'
+  text = text..'\n'..'Send !ver For See SilVeR Robot Info'
+  text = text..'\n'..'BoT HelPeR:@HelPeR01RoBoT - Sudo: @Mr_SilVeR1'
   return text
 end
  
@@ -151,9 +151,9 @@ local function run(msg, matches)
 end
  
 return {
-  description = "ZAC Team Robot Help",
+  description = "SilVeR Robot Help",
   usage = {
-    "!help : ZAC Bot Tools Help",
+    "!help : SilVeR Bot Tools Help",
     "!helps : See More Info For All Tools",
     "!help <Name> : See More Info For Item",
     "!help <Num>: See More Info For Item"
